@@ -1,0 +1,113 @@
+    {% extends "masterPage.html" %}
+
+    {% block content %}
+
+<form action="/selection" method="POST" >
+    <div class="row">
+        <!-- Left Rail -->
+        <div class="col-xl-12 col-md-4">
+                <div class="section" >
+                    <div class="panel panel--loose panel--raised base-margin-bottom">
+
+
+                            <div class="section">
+                                <div class="flex-center-vertical">
+
+                                    <div class="col-xl-3 col-md-4">
+                                        <div class="form-group">
+                                            <div class="form-group__text select">
+                                                <select id="network_id" name="network_id">
+                                                    {% for network in networks %}
+                                                        {% if network.id == selected_network.id %}
+                                                            <option value="{{network.id}}" selected="selected">{{network.name}}</option>
+                                                        {% else %}
+                                                            <option value="{{network.id}}">{{network.name}}</option>
+                                                        {%endif%}
+                                                    {%endfor%}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-fluid">
+                                        <input name="submit_button" class="btn btn-primary" type="submit" value="Search" onclick="$('#loader_branch').show();">
+                                    </div>
+
+                                    <div class="flex-fluid-right">
+                                        <input name="download_button" class="btn btn-primary" type="submit" value="Download CSV" onclick="$('#csv').show();">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="section">
+                                <div class="responsive-table">
+                                    <table class="table table--lined table--selectable table">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center"> Organization ID </th>
+                                                <th class="text-center"> Network ID </th>
+                                                <th class="text-center"> Name </th>
+                                                <th class="text-center"> Time Zone </th>
+                                                <th class="text-center"> Product Types </th>
+                                                <th class="text-center"> Tags </th>
+                                            </tr>
+                                        </thead>
+    
+                                        <tbody>
+                                        <tr>
+                                            <td class="text-center">{{selected_network.organizationId}}</td>
+                                            <td class="text-center">{{selected_network.id}}</td>
+                                            <td class="text-center">{{selected_network.name}}</td>
+                                            <td class="text-center">{{selected_network.timeZone}}</td>
+                                            <td class="text-center">{{selected_network.productTypes}}</td>
+                                            <td class="text-center">{{selected_network.tags}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+    
+                            </div>
+
+
+
+                        <div class="section">
+                            <div class="responsive-table">
+                                <table class="table table--lined table--selectable table">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center"> Policy </th>
+                                            <th class="text-center"> Rule Description </th>
+                                            <th class="text-center"> Protocol </th>
+                                            <th class="text-center"> Source IP </th>
+                                            <th class="text-center"> Source Port </th>
+                                            <th class="text-center"> Destination IP </th>
+                                            <th class="text-center"> Destination Port </th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for rule in firewall_rules %}
+                                    <tr>
+                                        <td class="text-center">{{rule.policy}}</td>
+                                        <td class="text-center">{{rule.comment}}</td>
+                                        <td class="text-center">{{rule.protocol}}</td>
+                                        <td class="text-center">{{rule.srcCidr}}</td>
+                                        <td class="text-center">{{rule.srcPort}}</td>
+                                        <td class="text-center">{{rule.destCidr}}</td>
+                                        <td class="text-center">{{rule.destPort}}</td>
+                                    </tr>
+                                    {%endfor%}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+</form>
+    {%  endblock %}
+
