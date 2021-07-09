@@ -55,7 +55,14 @@ Activate the virtual env
 ## Setup: 
 
 *Cisco Meraki*
-1. Add the Meraki API Key and Organization Id to env_var.py
+
+Add the Meraki API Key and Organization Id to env_var.py.  Generate your meraki api key in order to use the application. You can find instructions on how to generate an API key here: 
+> https://documentation.meraki.com/General_Administration/Other_Topics/Cisco_Meraki_Dashboard_API
+
+Make sure this API key has write access to both the source and target organization. You can add your account as Full Organization Admin to both organizations by following the instructions here: 
+> https://documentation.meraki.com/General_Administration/Managing_Dashboard_Access/Managing_Dashboard_Administrators_and_Permissions.
+
+The ```config``` variable is a dictionary. 
 ```
 config = {}
 
